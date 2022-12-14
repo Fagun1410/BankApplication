@@ -1,7 +1,5 @@
 package com.bankApplication.services;
 
-import java.util.Scanner;
-
 import com.bankApplication.dtos.Account;
 
 public interface TransactionHandler {

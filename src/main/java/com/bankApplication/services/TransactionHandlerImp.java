@@ -25,8 +25,13 @@ public class TransactionHandlerImp implements TransactionHandler {
 		// balance = 1000;
 		if (amt > balance) {
 			throw new InsufficientFundException("You don't have enough fund to withdraw " + amt);
+		} else if (amt <= 0) {
+			throw new InsufficientFundException("Withdral amount must be greater than zero");
 		}
+		// System.out.println("Balance before withdraw:"+balance);
 		balance = balance - amt;
+		account.setBalance(balance);
+		// System.out.println("Balance after withdraw:"+account.getBalance());
 		System.out.println("Your available balance is " + balance + " after withdrawal of " + amt);
 	}
 
@@ -35,15 +40,17 @@ public class TransactionHandlerImp implements TransactionHandler {
 		double amt = SC.nextDouble();
 		double balance = account.getBalance();
 		// balance = 1000;
-		if (amt == 0) {
+		if (amt <= 0) {
 			throw new InvalidAmoutException("Enter valid amount to deposit");
 		}
+		// System.out.println("Balance before deposit:"+balance);
 		balance = balance + amt;
+		account.setBalance(balance);
+		// System.out.println("Balance after deposit:"+account.getBalance());
 		System.out.println("Your available balance is " + balance + " after deposit of " + amt);
 	}
 
 	private void viewBalance(Account account) {
 
 	}
-
 }
