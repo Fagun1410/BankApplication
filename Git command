@@ -1,0 +1,6 @@
+Step 1: goto project folder in Git CMD
+Step 2: git init //To initialize Git repository
+Step 3: git add . // To add all files
+Step 4: git commit -m "description for code changes" //To commit code change in local repository
+Step 5: git remote add origin 'git repository link' // This is for the first time
+Step 6: git push -u origin master //To update code changes in Github repository

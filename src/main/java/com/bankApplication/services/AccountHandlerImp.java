@@ -1,6 +1,6 @@
 package com.bankApplication.services;
 
-import java.util.Random;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.bankApplication.dtos.Account;
@@ -8,51 +8,61 @@ import com.bankApplication.dtos.CurrentAccount;
 import com.bankApplication.dtos.SavingAccount;
 
 public class AccountHandlerImp implements AccountHandler {
-
+	
+	AccountNoGenerator accountnogenerator = new AccountNoGenerator();
 	@Override
 	public Account createAccount(Account account) throws InvalidAccountNoException{
 		int choice;
 		int pin;
+		String accname;
+		long accno;
+		ArrayList<Account> acc=new ArrayList<Account>();
 		Scanner SC = new Scanner(System.in);
 		System.out.println("Select Account Type");
 		System.out.println("1. Saving Account\n2. Current Account");
 		choice = SC.nextInt();
 		switch (choice) {
 		case 1:
-			account = new SavingAccount();
-			//long saccno = generateAccountNo();
-			long saccno = 329125273;
-			String ss = String.valueOf(saccno);
-			if(ss.startsWith("1")) {
+			accno = accountnogenerator.generateAccountNo();
+			account.setAccountNo(accno);
+			String ss = String.valueOf(accno);
+			if(ss.startsWith("0")) {
 				throw new InvalidAccountNoException("Invalid Account Number");
 			}
-			account.setAccountNo(saccno);
-			System.out.println(account.getAccountNo());
+			System.out.println("Generated Account Number: "+account.getAccountNo());
+			System.out.println("Enter Account Holder Name");
+			accname = SC.next();
 			System.out.println("Set Pin");
 			pin = SC.nextInt();
-			account.setPin(pin);
+			if(!String.valueOf(pin).matches("\\d{4}")) {
+				System.out.println("PIN must contains 4 digits");
+				break;
+			}
+			acc = account.getAccounts();
+			acc.add(new SavingAccount(accno,accname,"Saving",pin));
+			account.setAccounts(acc);
 			break;
 		case 2:
-			account = new CurrentAccount();
-			long caccno = generateAccountNo();
-			System.out.println(caccno);
-			String sc = String.valueOf(caccno);
-			if(sc.startsWith("1")) {
+			accno = accountnogenerator.generateAccountNo();
+			account.setAccountNo(accno);
+			String sc = String.valueOf(accno);
+			if(sc.startsWith("0")) {
 				throw new InvalidAccountNoException("Invalid Account Number");
 			}
-			account.setAccountNo(caccno);
-			System.out.println(account.getAccountNo());
+			System.out.println("Generated Account Number: "+account.getAccountNo());
+			System.out.println("Enter Account Holder Name");
+			accname = SC.next();
 			System.out.println("Set Pin");
 			pin = SC.nextInt();
-			account.setPin(pin);
+			if(!String.valueOf(pin).matches("\\d{4}")) {
+				System.out.println("PIN must contains 4 digits");
+				break;
+			}
+			acc = account.getAccounts();
+			acc.add(new CurrentAccount(accno,accname,"Current",pin));
+			account.setAccounts(acc);
 			break;
 		}
 		return account;
-	}
-
-	private long generateAccountNo() {
-		Random r = new Random();
-	    int numbers = 1000000000 + (int)(r.nextDouble() * 999999999);
-		return numbers;
 	}
 }

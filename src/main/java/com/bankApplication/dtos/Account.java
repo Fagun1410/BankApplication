@@ -1,5 +1,6 @@
 package com.bankApplication.dtos;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import lombok.Getter;
@@ -8,18 +9,19 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Account {
+	ArrayList<Account> accounts = new ArrayList<Account>();
 	private long AccountNo;
 	private String AccountName;
 	private String AccountType;
-	private double Balance=1000;
+	private double Balance = 1000;
 	private int Pin;
 	private double interestRate;
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(AccountNo);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
