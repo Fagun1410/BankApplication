@@ -3,12 +3,12 @@ package com.bankApp;
 import java.util.Scanner;
 
 import com.bankApplication.dtos.Account;
+import com.bankApplication.exception.AccountSuspendedException;
+import com.bankApplication.exception.InsufficientFundException;
+import com.bankApplication.exception.InvalidAccountNoException;
+import com.bankApplication.exception.InvalidAmoutException;
 import com.bankApplication.services.AccountHandler;
 import com.bankApplication.services.AccountHandlerImp;
-import com.bankApplication.services.AccountSuspendedException;
-import com.bankApplication.services.InsufficientFundException;
-import com.bankApplication.services.InvalidAccountNoException;
-import com.bankApplication.services.InvalidAmoutException;
 import com.bankApplication.services.TransactionHandler;
 import com.bankApplication.services.TransactionHandlerImp;
 

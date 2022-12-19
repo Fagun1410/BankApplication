@@ -1,4 +1,4 @@
-package com.bankApplication.services;
+package com.bankApplication.exception;
 
 public class InsufficientFundException extends Exception {
 	public InsufficientFundException (String str)  
